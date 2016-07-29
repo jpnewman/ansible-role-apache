@@ -1,5 +1,6 @@
 # jpnewman.apache
 
+[![Ansible Role](https://img.shields.io/ansible/role/11258.svg?maxAge=2592000)](https://galaxy.ansible.com/jpnewman/apache/)
 [![Build Status](https://travis-ci.org/jpnewman/ansible-role-apache.svg?branch=master)](https://travis-ci.org/jpnewman/ansible-role-apache)
 
 This is an Ansible role to install apache.
