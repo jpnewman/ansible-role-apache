@@ -1,0 +1,50 @@
+{% if server_name is defined %}
+ServerName {{ server_name }}
+{% endif %}
+{% for vhost in apache_virtualhosts %}
+
+<VirtualHost {{ vhost.listening_ip }}:{{ vhost.listening_port }}>
+{% if vhost.server_name is defined %}
+    ServerName {{ vhost.server_name }}
+{% endif %}
+{% if vhost.server_alias is defined %}
+    ServerAlias {{ vhost.server_alias }}
+{% endif %}
+{% if vhost.document_root is defined %}
+    DocumentRoot {{ vhost.document_root }}
+{% endif %}
+{% for name, value in vhost.iteritems() %}
+{% if '_' not in name %}
+{% if value %}
+    {{ name }} {{ value }}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% if 'extra_directives' in vhost %}
+
+{% for line in vhost['extra_directives'].rstrip().split('\n') %}
+    {{ line }}
+{% endfor %}
+{% endif %}
+
+{% if '_directories' in vhost %}
+{% for _directory in vhost._directories %}
+    <Directory {{ _directory['_root'] }}>
+{% for name, value in _directory.iteritems() %}
+{% if '_' not in name %}
+{% if value %}
+        {{ name }} {{ value }}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% if 'extra_directives' in _directory %}
+
+{% for line in _directory['extra_directives'].rstrip().split('\n') %}
+        {{ line }}
+{% endfor %}
+{% endif %}
+    </Directory>
+{% endfor %}
+{% endif %}
+</VirtualHost>
+{% endfor %}

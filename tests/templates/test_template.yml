@@ -1,0 +1,17 @@
+---
+- hosts: all
+  gather_facts: no
+  become: no
+
+  vars_files:
+    - "{{ varfile | default('../../defaults/main.yml') }}"
+
+  vars:
+    ansible_fqdn: localhost
+    ansible_lsb:
+      codename: Trusty Tahr
+    output_filename: vhost.conf
+
+  tasks:
+    - name: Generate apache.vhosts
+      template: src=../../templates/vhost.conf.j2 dest=./tmp/{{ output_filename }}
