@@ -30,7 +30,7 @@
 
 - name: Create apache log directory
   file:
-    path: "{{ gerrit_apache_log_dir }}"
+    path: "{{ apache_log_dir }}"
     state: directory
     owner: root
     group: root

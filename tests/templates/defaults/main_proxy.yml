@@ -2,7 +2,7 @@
 certificate_file: "/etc/pki/tls/certs/notsecure.crt"
 certificate_key_file: "/etc/pki/tls/certs/notsecure.key"
 
-apache_log_path: /var/log/apache2
+apache_log_dir: /var/log/apache2
 
 apache_mods_enabled:
   - rewrite.load
@@ -19,8 +19,8 @@ apache_virtualhosts:
     document_root: /var/www
     extra_directives: |
       LogLevel info
-      ErrorLog {{ apache_log_path }}/localhost-error.log
-      CustomLog {{ apache_log_path }}/localhost-access.log combined env=!dontlog
+      ErrorLog {{ apache_log_dir }}/localhost-error.log
+      CustomLog {{ apache_log_dir }}/localhost-access.log combined env=!dontlog
 
       RewriteEngine On
       RewriteCond %{HTTPS} off

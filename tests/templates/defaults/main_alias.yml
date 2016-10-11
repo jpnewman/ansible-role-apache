@@ -11,22 +11,22 @@ ssl_cert_directory: /etc/pki/tls/certs
 certificate_file: "{{ ssl_cert_directory }}/notsecure.crt"
 certificate_key_file: "{{ ssl_cert_directory }}/notsecure.key"
 
-apache_log_path: /var/log/apache2
+apache_log_dir: /var/log/apache2
 
 apache_mods_enabled: []
 
 server_name: localhost
 
 apache_virtualhosts:
-  - listening_ip: "*"
+  - listening_ip: '*'
     listening_port: 80
     server_name: localhost
     document_root: /var/www
     Alias: /reviewstats /var/reviewstats
     extra_directives: |
       LogLevel info
-      ErrorLog {{ apache_log_path }}/localhost-error.log
-      CustomLog {{ apache_log_path }}/localhost-access.log combined env=!dontlog
+      ErrorLog {{ apache_log_dir }}/localhost-error.log
+      CustomLog {{ apache_log_dir }}/localhost-access.log combined env=!dontlog
     _directories:
       - _root: /var/www
         Options: Indexes FollowSymLinks

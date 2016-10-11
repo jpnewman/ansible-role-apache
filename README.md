@@ -20,7 +20,7 @@ Ansible 2.x
 |```ssl_cert_directory```||/etc/pki/tls/certs|
 |```certificate_file```||```"{{ ssl_cert_directory }}/notsecure.crt"```|
 |```certificate_key_file```||```"{{ ssl_cert_directory }}/notsecure.key"```|
-|```apache_log_path```||/var/log/apache2|
+|```apache_log_dir```||/var/log/apache2|
 |```apache_mods_enabled```||[```rewrite.load```,<br />```ssl.load```]|
 |```server_name```||localhost|
 |```apache_virtualhosts```|List of ```vhost``` Objects||
@@ -59,8 +59,8 @@ apache_virtualhosts:
     document_root: /var/www
     extra_directives: |
       LogLevel info
-      ErrorLog {{ apache_log_path }}/localhost-error.log
-      CustomLog {{ apache_log_path }}/localhost-access.log combined env=!dontlog
+      ErrorLog {{ apache_log_dir }}/localhost-error.log
+      CustomLog {{ apache_log_dir }}/localhost-access.log combined env=!dontlog
 
       RewriteEngine On
       RewriteCond %{HTTPS} off
